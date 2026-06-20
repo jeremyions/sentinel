@@ -1,5 +1,6 @@
 import { getSignals } from "@/domain/signals";
 import { analyze } from "@/domain/engine/analyze";
+import { isSynthesisConfigured } from "@/domain/synthesis/synthesize";
 import { Dashboard } from "@/components/Dashboard";
 import { PageHeader } from "@/components/PageHeader";
 
@@ -29,7 +30,11 @@ export default async function Home() {
         )}
       </PageHeader>
 
-      <Dashboard signals={signals} insights={insights} />
+      <Dashboard
+        signals={signals}
+        insights={insights}
+        synthesisConfigured={isSynthesisConfigured()}
+      />
     </div>
   );
 }

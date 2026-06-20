@@ -62,6 +62,11 @@ export default function AgentsPage() {
           path="/llms.txt"
           desc="Agent guide + live snapshot (llms.txt convention)"
         />
+        <Endpoint
+          method="POST"
+          path="/api/briefing"
+          desc="AI-synthesized 'Do now' briefing (body: lens, profile)"
+        />
       </section>
 
       <section className="mt-8 space-y-3">

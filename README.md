@@ -61,8 +61,9 @@ changes. See `src/domain/signals/sources/README.md` for the rollout plan
 
 ## Roadmap
 
-- [ ] Wire real free data sources incrementally (rates → weather → commodities → markets → legislation).
-- [ ] User context (industry, location, risk profile) to personalize which playbooks and actions surface.
+- [x] Wire the first real free data sources (Open-Meteo weather is live; FRED rates/inflation ready behind a key).
+- [x] LLM synthesis layer: Claude turns the fired playbooks + your context into one prioritized "Do now" briefing (grounded in the curated knowledge, gated on `ANTHROPIC_API_KEY`).
+- [ ] Wire the remaining data sources (commodities → markets → legislation).
 - [ ] Composite playbooks (combinations of signals, e.g. "oil up _and_ rates up").
 - [ ] Alerts / digest when signals cross thresholds.
 - [ ] Saved watchlist and history of how signals moved.

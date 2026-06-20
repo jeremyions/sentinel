@@ -5,6 +5,7 @@ import type { Insight, Lens, Signal } from "@/domain/types";
 import { forLens } from "@/domain/engine/analyze";
 import { SignalCard } from "@/components/SignalCard";
 import { InsightCard } from "@/components/InsightCard";
+import { BriefingPanel } from "@/components/BriefingPanel";
 
 const LENSES: { id: Lens; label: string; blurb: string }[] = [
   { id: "business", label: "For my business", blurb: "Founder & operator lens" },
@@ -14,9 +15,11 @@ const LENSES: { id: Lens; label: string; blurb: string }[] = [
 export function Dashboard({
   signals,
   insights,
+  synthesisConfigured,
 }: {
   signals: Signal[];
   insights: Insight[];
+  synthesisConfigured: boolean;
 }) {
   const [lens, setLens] = useState<Lens>("business");
 
@@ -52,6 +55,8 @@ export function Dashboard({
           active insight{lensInsights.length === 1 ? "" : "s"}, ordered by
           urgency
         </p>
+
+        <BriefingPanel lens={lens} configured={synthesisConfigured} />
 
         <div className="space-y-4">
           {lensInsights.length === 0 ? (
