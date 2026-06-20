@@ -11,27 +11,32 @@ export function trendGlyph(trend: Trend): string {
 
 /** Tailwind text color for a directional move (up/down isn't good/bad here). */
 export function trendColor(trend: Trend): string {
-  return trend === "up"
-    ? "text-positive"
-    : trend === "down"
-      ? "text-danger"
-      : "text-muted";
+  return trend === "up" ? "text-up" : trend === "down" ? "text-down" : "text-faint";
 }
 
 export function severityColor(severity: Severity): string {
   return severity === "high"
-    ? "text-danger"
+    ? "text-high"
     : severity === "medium"
-      ? "text-warning"
-      : "text-positive";
+      ? "text-medium"
+      : "text-low";
 }
 
 export function severityDot(severity: Severity): string {
   return severity === "high"
-    ? "bg-danger"
+    ? "bg-high"
     : severity === "medium"
-      ? "bg-warning"
-      : "bg-positive";
+      ? "bg-medium"
+      : "bg-low";
+}
+
+/** Soft badge background for a severity, readable on white. */
+export function severityBadge(severity: Severity): string {
+  return severity === "high"
+    ? "bg-high/10 text-high"
+    : severity === "medium"
+      ? "bg-medium/10 text-medium"
+      : "bg-low/10 text-low";
 }
 
 export function horizonLabel(horizon: TimeHorizon): string {

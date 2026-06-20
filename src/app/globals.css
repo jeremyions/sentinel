@@ -3,14 +3,16 @@
 @tailwind utilities;
 
 html {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 body {
-  @apply bg-ink text-slate-100 antialiased;
-  background-image: radial-gradient(
-    1200px 600px at 70% -10%,
-    rgba(91, 157, 255, 0.08),
-    transparent
-  );
+  @apply bg-canvas text-ink antialiased;
+  /* Subtle silver wash so white surfaces read as layered, not flat. */
+  background-image: linear-gradient(180deg, #ffffff 0%, #f4f6f8 100%);
+  background-attachment: fixed;
+}
+
+::selection {
+  background: rgba(11, 13, 16, 0.1);
 }
