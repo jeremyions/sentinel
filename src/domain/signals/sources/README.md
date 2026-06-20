@@ -15,15 +15,20 @@ same ids the curated snapshot uses, then register it in `../index.ts`. Because
 later sources override earlier ones by id, a live source transparently replaces
 its curated placeholder — no UI or engine changes required.
 
-## Suggested rollout order (all have free tiers)
+## Status & rollout order (all have free tiers)
 
-| Signal(s)                     | Source                          | Notes                                   |
+| Signal(s)                     | Source                          | Status                                  |
 | ----------------------------- | ------------------------------- | --------------------------------------- |
-| Policy rate, inflation (CPI)  | FRED API (St. Louis Fed)        | Free key; clean macro series.           |
-| Oil (Brent/WTI), gold         | EIA / metals API / Yahoo-style  | Free tiers exist; watch rate limits.    |
-| Equity & dollar indices       | Stooq / Alpha Vantage           | Free tier, delayed quotes are fine.     |
-| Legislation                   | Congress.gov / GovTrack         | Map bill status → an intensity score.   |
-| Weather / extreme events      | NOAA / Open-Meteo               | No key for Open-Meteo; great for MVP.   |
+| Weather / extreme heat        | Open-Meteo (`weather.ts`)       | ✅ Live, keyless — drives `heat_event`. |
+| Policy rate, inflation (CPI)  | FRED API (`fred.ts`)            | 🔑 Ready — set `FRED_API_KEY` to activate. |
+| Oil (Brent/WTI), gold         | EIA / metals API                | ⬜ Planned. Free tiers; watch limits.    |
+| Equity & dollar indices       | Alpha Vantage / Stooq           | ⬜ Planned. Delayed quotes are fine.     |
+| Legislation                   | Congress.gov / GovTrack         | ⬜ Planned. Map bill status → intensity. |
+
+To activate FRED: get a free key at
+<https://fredaccount.stlouisfed.org/apikeys>, then add `FRED_API_KEY=...` to
+`.env` (git-ignored). Live rate/inflation values replace the curated ones
+automatically; without the key the curated placeholders stay.
 
 ## Implementation notes
 

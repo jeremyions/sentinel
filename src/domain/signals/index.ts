@@ -1,5 +1,7 @@
 import type { Signal } from "@/domain/types";
 import { CURATED_SIGNALS } from "@/domain/signals/curated";
+import { weatherSource } from "@/domain/signals/sources/weather";
+import { fredSource } from "@/domain/signals/sources/fred";
 
 /**
  * A SignalSource is anything that can produce the current set of signals.
@@ -25,8 +27,12 @@ const curatedSource: SignalSource = {
  * The registry of active sources. As real adapters land, add them here.
  * When two sources report the same signal id, the later source wins, so a
  * live provider can transparently override the curated placeholder.
+ *
+ * `weatherSource` (Open-Meteo, keyless) overrides the curated `heat_event`
+ * with live data. Curated stays first so any live-source outage falls back to
+ * the placeholder rather than dropping the signal entirely.
  */
-const SOURCES: SignalSource[] = [curatedSource];
+const SOURCES: SignalSource[] = [curatedSource, weatherSource, fredSource];
 
 /**
  * Gather signals from every registered source and de-duplicate by id.
